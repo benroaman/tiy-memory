@@ -66,13 +66,6 @@ body {
   padding-top: 16.6%;
 }
 
-.game-card__checkbox {
-  opacity: 0;
-  top: 0;
-  left: 0;
-  position: absolute;
-}
-
 .game-card__shape {
   -webkit-backface-visibility: visible;
   -webkit-animation: flip 1s;
@@ -99,13 +92,13 @@ body {
 }
 
 /*makes icons appear when cards are clicked/flipped*/
-.game-card__checkbox:checked ~ .game-card__decoration {
+.deco-flip {
   -webkit-animation: iconin 1s;
   opacity: 1;
 }
 
 /*makes cards flip when clicked*/
-.game-card__checkbox:checked + .game-card__shape {
+.card-flip {
   -webkit-backface-visibility: visible;
   -webkit-animation: flip2 1s;
 }
