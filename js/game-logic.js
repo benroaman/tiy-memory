@@ -12,6 +12,8 @@ game.logic = function() {
         right();
       } else {
         decrementLife();
+        $('.solo-heart').removeClass('pop');
+        $('.solo-heart').toggleClass('pop-pop');
         $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
         isLoss();
         setTimeout(wrong, 2000);
@@ -51,6 +53,7 @@ game.logic = function() {
   }
 
   function loss() {
+    $('.ungot').off('click', flip);
     alert('you lose!');
   }
 
@@ -66,6 +69,8 @@ game.logic = function() {
     $('.deco-flip', '.guess').toggleClass('deco-flip');
     $('.guess').toggleClass('guess');
     $('.ungot').on('click', flip);
+    $('.solo-heart').addClass('pop');
+    $('.solo-heart').toggleClass('pop-pop');
   }
 
 }

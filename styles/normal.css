@@ -44,8 +44,38 @@ body {
   }
 
 .game-life {
+  display: inline-block;
   font-family: memoryicons;
   letter-spacing: 5px;
+}
+
+.solo-heart {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  font-family: memoryicons;
+  letter-spacing: 5px;
+  font-size: 2.5em;
+  margin-left: -.25em;
+  opacity: 0;
+  color: firebrick;
+}
+
+.life {
+  position: relative;
+  display: inline-block;
+}
+
+.pop-pop {
+  font-size: 1em;
+  opacity: 1;
+  margin-left: 0;
+  color: white;
+}
+
+.pop {
+  -webkit-transition: all .75s;
 }
 
 .game-timer {
@@ -173,6 +203,12 @@ so I just copied it and called it flip2*/
     transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
     animation-timing-function: ease-in;
   }
+}
+
+@-webkit-keyframes heart {
+  0% {opacity: 1; font-size: 1em;}
+
+  100% {opacity: 0; font-size: 3em;}
 }
 
 /*-------------------------*/
