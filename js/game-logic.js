@@ -4,6 +4,7 @@ game.logic = function() {
 
   function flip(e) {
     var card = $(this);
+    card.off('click', flip);
     card.toggleClass('guess')
     $('.game-card__shape', card).toggleClass('card-flip');
     $('.game-card__decoration', card).toggleClass('deco-flip');
@@ -15,7 +16,6 @@ game.logic = function() {
         $('.solo-heart').removeClass('pop');
         $('.solo-heart').toggleClass('pop-pop');
         $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
-        isLoss();
         setTimeout(wrong, 2000);
       }
     }
@@ -58,7 +58,6 @@ game.logic = function() {
   }
 
   function right() {
-    $('.guess').off('click', flip);
     $('.guess').toggleClass('ungot');
     $('.guess').toggleClass('guess');
     isVictory();
@@ -71,6 +70,13 @@ game.logic = function() {
     $('.ungot').on('click', flip);
     $('.solo-heart').addClass('pop');
     $('.solo-heart').toggleClass('pop-pop');
+    isLoss();
   }
 
 }
+
+// TODO: add victory screen
+// TODO: add failure screen?
+// TODO: add return to main link
+// TODO: style this shit
+// TODO: keep being awesome

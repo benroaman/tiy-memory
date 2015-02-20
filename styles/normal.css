@@ -56,8 +56,8 @@ body {
   -webkit-transform: translateY(-50%);
   font-family: memoryicons;
   letter-spacing: 5px;
-  font-size: 2.5em;
-  margin-left: -.25em;
+  font-size: 3em;
+  margin-left: -.3em;
   opacity: 0;
   color: firebrick;
 }
@@ -65,6 +65,7 @@ body {
 .life {
   position: relative;
   display: inline-block;
+  height: 1.1em;
 }
 
 .pop-pop {
@@ -75,7 +76,7 @@ body {
 }
 
 .pop {
-  -webkit-transition: all .75s;
+  -webkit-transition: all .65s;
 }
 
 .game-timer {
@@ -94,6 +95,14 @@ body {
   float: left;
   width: 16.6%;
   padding-top: 16.6%;
+}
+
+.ungot:hover {
+  cursor: pointer;
+}
+
+.guess:hover {
+  cursor: auto;
 }
 
 .hard-card {
