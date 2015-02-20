@@ -66,6 +66,14 @@ body {
   padding-top: 16.6%;
 }
 
+.hard-card {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 12.5%;
+  padding-top: 12.5%;
+}
+
 .game-card__shape {
   -webkit-backface-visibility: visible;
   -webkit-animation: flip 1s;
@@ -178,4 +186,9 @@ definitions, none of them worked. go figure*/
   .game-card {
   width: 33.3%;
   padding-top: 33.3%;
+  }
+
+  .hard-card {
+  width: 24.9%;
+  padding-top: 24.9%;
   }

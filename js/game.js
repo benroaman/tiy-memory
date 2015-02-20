@@ -1,1 +1,3 @@
-var game = {};
+var game = {
+  router: Rlite()
+};

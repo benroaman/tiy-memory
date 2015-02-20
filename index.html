@@ -1,32 +1,88 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Memory :: Mode Select</title>
+    <title>Memory</title>
     <link rel="stylesheet" type="text/css" href="styles/title.css" />
+    <link rel="stylesheet" type="text/css" href="styles/normal.css" />
   </head>
   <body>
 
-    <div class="title-box">
+    <div class="main-content"></div>
 
-      <h1 class="title-text">mem<span class="icon">o</span>ry</h1>
+    <script type="text/html" id="main-page">
 
-      <h2 class="subtitle">NEW GAME</h2>
+      <div class="title-box">
 
-      <a class="link easy" href="easy.html">easy</a>
+        <h1 class="title-text">mem<span class="icon">o</span>ry</h1>
 
-      <a class="link hard" href="hard.html">hard</a>
+        <h2 class="subtitle">NEW GAME</h2>
 
-    </div>
+        <a class="link easy" href="#normalmode">easy</a>
+
+        <a class="link hard" href="#hardmode">hard</a>
+
+      </div>
+
+    </script>
+
+    <script type="text/html" id="normal-mode">
+
+      <div class="header">
+        <h1 class="header-title">mem<span class="title-o">o</span>ry</h1>
+      </div>
+
+      <div class="game-info">
+        <span class="game-life">aaaaaaaa</span>
+        <span class="game-timer">00:00:00</span>
+      </div>
+
+      <div class="game-board">
+
+        <% m.deck.forEach(function(card) { %>
+        <div class="game-card ungot">
+          <span class="game-card__shape"></span>
+          <span class="game-card__decoration"><%- card %></span>
+        </div>
+        <% }) %>
+
+      </div>
+
+    </script>
+
+    <script type="text/html" id="hard-mode">
+
+      <div class="header">
+        <h1 class="header-title">mem<span class="title-o">o</span>ry</h1>
+      </div>
+
+      <div class="game-info">
+        <span class="game-life">aaaaaaaa</span>
+        <span class="game-timer">00:00:00</span>
+      </div>
+
+      <div class="game-board">
+
+        <% m.deck.forEach(function(card) { %>
+        <div class="hard-card game-card ungot">
+          <span class="game-card__shape"></span>
+          <span class="game-card__decoration"><%- card %></span>
+        </div>
+        <% }) %>
+
+      </div>
+
+    </script>
 
     <script src="js/jquery.js"></script>
     <script src="js/lodash.js"></script>
-    <script src="js/rlite.js"></script>
+    <script src="js/rlite.min.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/shuffler.js"></script>
     <script src="js/game-logic.js"></script>
     <script src="js/main-page.js"></script>
     <script src="js/easy-page.js"></script>
     <script src="js/hard-page.js"></script>
-
+    <script src="js/init.js"></script>
 
   </body>
 </html>

@@ -13,6 +13,7 @@ game.logic = function() {
       } else {
         decrementLife();
         $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
+        isLoss();
         setTimeout(wrong, 2000);
       }
     }
@@ -33,7 +34,7 @@ game.logic = function() {
   }
 
   function isVictory() {
-    if ($('.game-card').length == $('.card-flip').length) {
+    if (!$('.ungot').length) {
       victory();
     }
   }
@@ -65,7 +66,6 @@ game.logic = function() {
     $('.deco-flip', '.guess').toggleClass('deco-flip');
     $('.guess').toggleClass('guess');
     $('.ungot').on('click', flip);
-    isLoss();
   }
 
 }
