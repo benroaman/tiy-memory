@@ -2,6 +2,9 @@ game.logic = function() {
 
   $('.game-card').on('click', flip);
 
+  var timer = game.Timer();
+  timer.start();
+
   function flip(e) {
     var card = $(this);
     card.off('click', flip);
@@ -16,7 +19,7 @@ game.logic = function() {
         $('.solo-heart').removeClass('pop');
         $('.solo-heart').toggleClass('pop-pop');
         $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
-        setTimeout(wrong, 2000);
+        setTimeout(wrong, 1700);
       }
     }
   }
@@ -49,11 +52,14 @@ game.logic = function() {
   }
 
   function victory() {
+    timer.stop();
     alert('you win!');
   }
 
   function loss() {
     $('.ungot').off('click', flip);
+    timer.stop();
+    $('.ungot').toggleClass('ungot');
     alert('you lose!');
   }
 
@@ -79,4 +85,5 @@ game.logic = function() {
 // TODO: add failure screen?
 // TODO: add return to main link
 // TODO: style this shit
+// TODO: remove text pointer on icon-hover
 // TODO: keep being awesome
