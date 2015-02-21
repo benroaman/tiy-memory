@@ -85,5 +85,3 @@ game.logic = function() {
 // TODO: add failure screen?
 // TODO: add return to main link
 // TODO: style this shit
-// TODO: remove text pointer on icon-hover
-// TODO: keep being awesome
