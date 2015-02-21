@@ -10,19 +10,20 @@ game.logic = function() {
     ++flips;
     var card = $(this);
     card.off('click', flip);
-    card.toggleClass('guess')
-    card.toggleClass('current-guess')
+    card.toggleClass('guess');
+
     $('.game-card__shape', card).toggleClass('card-flip');
     $('.game-card__decoration', card).toggleClass('deco-flip');
+
     if (isSecondCard()) {
-      if (isMatch()) {
-        right();
+      var pair = $('.guess').toArray();
+      pair.forEach(function(item) {
+        $(item).toggleClass('guess');
+      })
+      if (isMatch(pair)) {
+        right(pair);
       } else {
-        decrementLife();
-        $('.solo-heart').removeClass('pop');
-        $('.solo-heart').toggleClass('pop-pop');
-        $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
-        setTimeout(wrong, 1250);
+        wrong(pair);
       }
     }
   }
@@ -31,14 +32,14 @@ game.logic = function() {
     return !(flips % 2);
   }
 
-  function isMatch() {
-    var guesses = $('.game-card__decoration', '.guess');
-    return $(guesses[0]).text() === $(guesses[1]).text();
+  function isMatch(pair) {
+    return pair[0].textContent === pair[1].textContent;
   }
 
   function decrementLife() {
-    var lifeBar = $('.game-life');
-    lifeBar.text(lifeBar.text().slice(1));
+    var lastActive = $('.active').last();
+    lastActive.addClass('broken');
+    lastActive.removeClass('active');
   }
 
   function isVictory() {
@@ -48,9 +49,9 @@ game.logic = function() {
   }
 
 
-  function isLoss() {
-    if ($('.game-life').text() === '') {
-      loss();
+  function isLoss(to) {
+    if (!$('.active').length) {
+      loss(to);
     }
   }
 
@@ -95,7 +96,8 @@ game.logic = function() {
     game.router.run(location.hash.slice(1))
   }
 
-  function loss() {
+  function loss(to) {
+    clearTimeout(to);
     $('.ungot').off('click', flip);
     timer.stop();
     $('.ungot').toggleClass('ungot');
@@ -111,25 +113,26 @@ game.logic = function() {
     })
   }
 
-  function right() {
-    $('.guess').toggleClass('ungot');
-    $('.guess').toggleClass('guess');
+  function right(pair) {
+    pair.forEach(function(item) {
+      $(item).toggleClass('ungot');
+    })
     isVictory();
   }
 
-  function wrong() {
-    $('.card-flip', '.guess').toggleClass('card-flip');
-    $('.deco-flip', '.guess').toggleClass('deco-flip');
-    $('.guess').toggleClass('guess');
-    $('.ungot').on('click', flip);
-    $('.solo-heart').addClass('pop');
-    $('.solo-heart').toggleClass('pop-pop');
-    isLoss();
+  function wrong(pair) {
+    decrementLife();
+    var wrongTimeOut = setTimeout(flipBack.bind(null, pair), 1250);
+    isLoss(wrongTimeOut);
+  }
+
+  function flipBack(pair) {
+    pair.forEach(function(item){
+      $('.game-card__shape', $(item)).toggleClass('card-flip');
+      $('.game-card__decoration', $(item)).toggleClass('deco-flip');
+      $(item).on('click', flip);
+    })
   }
 
 }
-
-// TODO: add victory screen
-// TODO: add failure screen?
-// TODO: add return to main link
 // TODO: style this shit
