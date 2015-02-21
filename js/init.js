@@ -12,3 +12,6 @@ $(function () {
   processHash();
 
 });
+
+game.timeStore = game.TimeStore();
+game.timeStore.load();

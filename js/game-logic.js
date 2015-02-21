@@ -19,7 +19,7 @@ game.logic = function() {
         $('.solo-heart').removeClass('pop');
         $('.solo-heart').toggleClass('pop-pop');
         $('.ungot').off('click', flip); // makes it so you can't flip cards while incorrect answers are exposed
-        setTimeout(wrong, 1700);
+        setTimeout(wrong, 1250);
       }
     }
   }
@@ -53,14 +53,59 @@ game.logic = function() {
 
   function victory() {
     timer.stop();
-    alert('you win!');
+    var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });
+    if (game.timeStore.isTopTime(newTime)) {
+      showTopTimeModal(newTime);
+    } else {
+      showVictoryModal();
+    }
+  }
+
+  function showTopTimeModal(newTime) {
+    $('.victory-greyout').html($('#top-time-modal').html());
+    $('.victory-greyout').toggleClass('modal-visible');
+    $('.initials-submit').click(function() {
+      newTime.name = $('.initials').val().toUpperCase();
+      while (newTime.name.length < 3) {
+        newTime.name = '-' + newTime.name;
+      }
+      game.timeStore.add(newTime);
+      game.timeStore.save();
+      showVictoryModal();
+    })
+  }
+
+  function showVictoryModal() {
+    $('.victory-greyout').html($('#victory-modal').html());
+    if (!$('.victory-greyout').hasClass('modal-visible')) {
+      $('.victory-greyout').toggleClass('modal-visible');
+    }
+    var topTimes = _.template($('#top-times').html(), { variable: 'm' });
+    $('.best-times').html(topTimes({ times: game.timeStore.query() }));
+    $('.again').click(function() {
+      setTimeout(restart, 2000);
+      $('.victory-greyout').toggleClass('modal-visible');
+    })
+  }
+
+  function restart() {
+    game.router.run(location.hash.slice(1))
   }
 
   function loss() {
     $('.ungot').off('click', flip);
     timer.stop();
     $('.ungot').toggleClass('ungot');
-    alert('you lose!');
+    showFailureModal();
+  }
+
+  function showFailureModal() {
+    $('.failure-greyout').html($('#failure-modal').html());
+    $('.failure-greyout').toggleClass('modal-visible');
+    $('.again').click(function() {
+      setTimeout(restart, 2000);
+      $('.failure-greyout').toggleClass('modal-visible');
+    })
   }
 
   function right() {

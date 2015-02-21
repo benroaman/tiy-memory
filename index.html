@@ -4,6 +4,7 @@
     <title>Memory</title>
     <link rel="stylesheet" type="text/css" href="styles/title.css" />
     <link rel="stylesheet" type="text/css" href="styles/normal.css" />
+    <link rel="stylesheet" type="text/css" href="styles/modal.css" />
   </head>
   <body>
 
@@ -27,22 +28,8 @@
 
     <script type="text/html" id="normal-mode">
 
-      <div class="modal-greyout" hidden>
-        <div class="modal-actual">
-
-          <h1 class="victory">you win!</h1>
-          <ol class="best-times">
-            <li class="best-time">XX:XX</li>
-            <li class="best-time">XX:XX</li>
-            <li class="best-time">XX:XX</li>
-            <li class="best-time">XX:XX</li>
-            <li class="best-time">XX:XX</li>
-          </ol>
-          <a class="again" href="#normalmode">again!</a>
-          <a class="go-back" href="#">main</a>
-
-        </div>
-      </div>
+      <div class="modal-greyout victory-greyout"></div>
+      <div class="modal-greyout failure-greyout"></div>
 
       <div class="header">
         <h1 class="header-title">mem<span class="title-o">o</span>ry</h1>
@@ -68,7 +55,68 @@
 
     </script>
 
+    <script type="text/html" id="victory-modal">
+
+      <div class="modal-actual">
+
+        <h1 class="victory">victory</h1>
+        <h3 class="bt-label">best times:</h3>
+        <ol class="best-times"></ol>
+        <span class="again modal-button">again!</span>
+        <a class="go-back modal-button" href="#">main</a>
+
+      </div>
+
+    </script>
+
+    <script type="text/html" id="failure-modal">
+
+      <div class="modal-actual fail-modal">
+
+        <h1 class="victory failure">failure</h1>
+        <span class="again modal-button fail-button">again!</span>
+        <a class="go-back modal-button fail-button" href="#">main</a>
+
+      </div>
+
+    </script>
+
+    <script type="text/html" id="top-time-modal">
+
+      <div class="modal-actual">
+
+        <h1 class="victory">victory</h1>
+        <h1 class="got-top-time">...and in record time!</h1>
+        <h2 class="got-top-time-sub">enter your initials:</h2>
+        <input type="text" class="initials" maxlength="3" placeholder="---" required />
+        <button class="initials-submit">become immortal</button>
+
+      </div>
+
+    </script>
+
+    <script type="text/html" id="top-times">
+
+      <% for (var i = 0; i < 5; ++i) { %>
+        <% if (m.times[i]) { %>
+          <li class="best-time">
+            <span class="time-elem time-name"><%- m.times[i].name %></span>
+            <span class="time-elem time-min"><%- m.times[i].min %></span>:<span class="time-elem time-sec"><%- m.times[i].sec %></span>
+          </li>
+        <% } else { %>
+          <li class="best-time">
+            <span class="time-elem time-name"><%- '---' %></span>
+            <span class="time-elem time-min"><%- '--' %></span>:<span class="time-elem time-sec"><%- '--' %></span>
+          </li>
+        <% } %>
+      <% } %>
+
+    </script>
+
     <script type="text/html" id="hard-mode">
+
+      <div class="modal-greyout victory-greyout"></div>
+      <div class="modal-greyout failure-greyout"></div>
 
       <div class="header">
         <h1 class="header-title">mem<span class="title-o">o</span>ry</h1>
@@ -94,16 +142,18 @@
 
     </script>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/lodash.js"></script>
-    <script src="js/rlite.min.js"></script>
+    <script src="js/libraries/jquery.js"></script>
+    <script src="js/libraries/lodash.js"></script>
+    <script src="js/libraries/rlite.min.js"></script>
     <script src="js/game.js"></script>
     <script src="js/shuffler.js"></script>
     <script src="js/timer.js"></script>
+    <script src="js/time-store.js"></script>
+    <script src="js/time.js"></script>
     <script src="js/game-logic.js"></script>
-    <script src="js/main-page.js"></script>
-    <script src="js/easy-page.js"></script>
-    <script src="js/hard-page.js"></script>
+    <script src="js/pages/main-page.js"></script>
+    <script src="js/pages/normal-page.js"></script>
+    <script src="js/pages/hard-page.js"></script>
     <script src="js/init.js"></script>
 
   </body>

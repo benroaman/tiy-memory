@@ -54,11 +54,12 @@ body {
   border: 3px solid white;
   padding: .5em;
   margin-top: .5em;
+  -webkit-transition: all .15s;
 }
 
 .link:hover {
   background: white;
-  color: #2F7D8E;
+  color: #455882;
 }
 
 .easy {

@@ -115,7 +115,7 @@ body {
 
 .game-card__shape {
   -webkit-backface-visibility: visible;
-  -webkit-animation: flip 1s;
+  -webkit-animation: flip .5s;
   position: absolute;
   top: 2px;
   left: 2px;
@@ -147,7 +147,7 @@ body {
 /*makes cards flip when clicked*/
 .card-flip {
   -webkit-backface-visibility: visible;
-  -webkit-animation: flip2 1s;
+  -webkit-animation: flip2 .5s;
 }
 
 /*-----------------------------*/
@@ -184,13 +184,8 @@ body {
     animation-timing-function: ease-out;
   }
 
-  50% {
-    transform: translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
-    animation-timing-function: ease-out;
-  }
-
   100% {
-    transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -180deg);
     animation-timing-function: ease-in;
   }
 }
@@ -203,13 +198,8 @@ so I just copied it and called it flip2*/
     animation-timing-function: ease-out;
   }
 
-  50% {
-    transform: translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
-    animation-timing-function: ease-out;
-  }
-
   100% {
-    transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -180deg);
     animation-timing-function: ease-in;
   }
 }
