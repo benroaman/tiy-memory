@@ -1,4 +1,5 @@
 game.logic = function() {
+  var flips = 0;
 
   $('.game-card').on('click', flip);
 
@@ -6,9 +7,11 @@ game.logic = function() {
   timer.start();
 
   function flip(e) {
+    ++flips;
     var card = $(this);
     card.off('click', flip);
     card.toggleClass('guess')
+    card.toggleClass('current-guess')
     $('.game-card__shape', card).toggleClass('card-flip');
     $('.game-card__decoration', card).toggleClass('deco-flip');
     if (isSecondCard()) {
@@ -25,7 +28,7 @@ game.logic = function() {
   }
 
   function isSecondCard() {
-    return $('.guess').length === 2;
+    return !(flips % 2);
   }
 
   function isMatch() {
