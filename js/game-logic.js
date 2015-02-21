@@ -58,10 +58,18 @@ game.logic = function() {
   function victory() {
     timer.stop();
     var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });
-    if (game.timeStore.isTopTime(newTime)) {
-      showTopTimeModal(newTime);
+    if ($('.game-card').length === 18) {
+      if (game.timeStore.isTopTimeNormal(newTime)) {
+        showTopTimeModal(newTime);
+      } else {
+        showVictoryModal();
+      }
     } else {
-      showVictoryModal();
+      if (game.timeStore.isTopTimeHard(newTime)) {
+        showTopTimeModal(newTime);
+      } else {
+        showVictoryModal();
+      }
     }
   }
 
@@ -73,7 +81,11 @@ game.logic = function() {
       while (newTime.name.length < 3) {
         newTime.name = '-' + newTime.name;
       }
-      game.timeStore.add(newTime);
+      if ($('.game-card').length === 18) {
+        game.timeStore.addNormal(newTime);
+      } else {
+        game.timeStore.addHard(newTime);
+      }
       game.timeStore.save();
       showVictoryModal();
     })
@@ -85,7 +97,11 @@ game.logic = function() {
       $('.victory-greyout').toggleClass('modal-visible');
     }
     var topTimes = _.template($('#top-times').html(), { variable: 'm' });
-    $('.best-times').html(topTimes({ times: game.timeStore.query() }));
+    if ($('.game-card').length === 18) {
+      $('.best-times').html(topTimes({ times: game.timeStore.queryNormal() }));
+    } else {
+      $('.best-times').html(topTimes({ times: game.timeStore.queryHard() }));
+    }
     $('.again').click(function() {
       setTimeout(restart, 2000);
       $('.victory-greyout').toggleClass('modal-visible');
