@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 128, 128, .75);
+  background: rgba(46, 139, 87, .75);
   z-index: 1;
   visibility: hidden;
   opacity: 0;
@@ -17,16 +17,18 @@
 
 .modal-actual {
   box-sizing: border-box;
-  width: 500px;
+  width: 410;
   height: 410px;
   position: absolute;
   left: 50%;
   top: 40%;
-  -webkit-transform: translate(-50%, -50%);
+  margin-left: -205px;
+  margin-top: -205px;
   text-align: center;
   background: rgba(255, 255, 255, .85);
   border-radius: 1em;
   padding: .5em;
+  -webkit-animation: pulse 7.5s ease-in-out infinite;
 }
 
 .fail-actual {
@@ -36,7 +38,7 @@
 .victory {
   font-weight: normal;
   font-size: 5em;
-  color: teal;
+  color: seagreen;
 }
 
 .failure {
@@ -48,25 +50,26 @@
 .best-times {
   text-align: center;
   margin: auto;
-  margin-top: 1em;
+  margin-top: .5em;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 1.75em;
   list-style-type: none;
 }
 
 .bt-label {
-  color: teal;
+  color: seagreen;
+  margin-top: -.3em;
 }
 
 .best-time {
   font-family: monospace;
   font-size: 1.5em;
-  color: teal;
+  color: slategrey;
 }
 
 .time-elem {
   font-size: 1.5em;
-  color: teal;
+  color: slategrey;
 }
 
 .modal-button {
@@ -74,44 +77,44 @@
   margin: .5em;
   padding: .25em;
   font-size: 2em;
-  background: teal;
-  color: white;
+  background: none;
+  color: seagreen;
+  border: 2px solid seagreen;
   text-decoration: none;
   border-radius: .25em;
   -webkit-transition: all .1s;
 }
 
 .modal-button:hover {
-  background: teal;
-  color: white;
+  background: white;
 }
 
 .fail-button {
-  background: rgba(255, 255, 255, .85);
+  background: none;
   color: firebrick;
+  border: 2px solid firebrick;
 }
 
 .fail-button:hover {
-  background: firebrick;
-  color: white;
+  background: black;
 }
 
 .got-top-time {
-  color: teal;
+  color: seagreen;
   font-weight: normal;
 }
 
 .got-top-time-sub {
   font-weight: normal;
-  color: teal;
+  color: seagreen;
   margin-top: 1em;
 }
 
 .initials {
   display: block;
-  color: teal;
+  color: seagreen;
   text-transform: uppercase;
-  margin: .15em auto .6em;
+  margin: .15em auto .25em;
   text-align: center;
   width: 4em;
   font-size: 5em;
@@ -125,20 +128,23 @@
 }
 
 .initials-submit {
-  color: white;
+  color: seagreen;
   font-size: 1.5em;
   padding: .35em;
   border-radius: .15em;
-  background: teal;
-  border: none;
+  background: none;
+  border: 2px solid seagreen;
   cursor: pointer;
+  transition: all .2s;
 }
 
 .initials-submit:focus {
   outline: none;
 }
 
-
+.initials-submit:hover {
+  background: white;
+}
 
 .modal-visible {
   visibility: visible;
