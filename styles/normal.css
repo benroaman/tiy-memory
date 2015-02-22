@@ -51,6 +51,7 @@ body {
 
 /*making the o in memory an icon and sizing it correctly*/
 .title-o {
+  -webkit-animation: pulse 7.5s ease-in-out infinite;
   color: #edd097;
   font-family: memoryicons;
   font-size: .6em;

@@ -22,7 +22,7 @@ body {
 }
 
 .title-box {
-  -webkit-animation: pulse 7.5s ease-in-out infinite;
+  -webkit-animation: pulse 8.5s ease-in-out infinite;
   width: 400px;
   height: 350px;
   margin-left: auto;
@@ -85,7 +85,7 @@ body {
 
 @-webkit-keyframes pulse  {
   0%    { -webkit-transform:  scale(1, 1);}
-  50%   { -webkit-transform:  scale(1.075, 1.075);}
+  50%   { -webkit-transform:  scale(1.1, 1.1);}
   100%  { -webkit-transform:  scale(1, 1);}
 }
 
