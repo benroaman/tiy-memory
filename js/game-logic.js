@@ -149,6 +149,5 @@ game.logic = function() {
       $(item).on('click', flip);
     })
   }
-
 }
 // TODO: style this shit

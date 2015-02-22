@@ -20,6 +20,7 @@ body {
   src: url(../fonts/memoryicons.ttf);
 }
 
+
 .game-info {
   position: relative;
   -webkit-animation: fadein 3s;
