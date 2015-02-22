@@ -11,21 +11,32 @@ game.logic = function() {
     var card = $(this);
     card.off('click', flip);
     card.toggleClass('guess');
+    animateFlip(card);
+    matchLogic();
+  }
 
-    $('.game-card__shape', card).toggleClass('card-flip');
-    $('.game-card__decoration', card).toggleClass('deco-flip');
-
+  function matchLogic() {
     if (isSecondCard()) {
-      var pair = $('.guess').toArray();
-      pair.forEach(function(item) {
-        $(item).toggleClass('guess');
-      })
+      var pair = getPair();
       if (isMatch(pair)) {
         right(pair);
       } else {
         wrong(pair);
       }
     }
+  }
+
+  function getPair() {
+    var pair = $('.guess').toArray();
+    pair.forEach(function(item) {
+      $(item).toggleClass('guess');
+    })
+    return pair;
+  }
+
+  function animateFlip(card) {
+    $('.game-card__shape', card).toggleClass('card-flip');
+    $('.game-card__decoration', card).toggleClass('deco-flip');
   }
 
   function isSecondCard() {
@@ -40,6 +51,12 @@ game.logic = function() {
     var lastActive = $('.active').last();
     lastActive.addClass('broken');
     lastActive.removeClass('active');
+  }
+
+  function incrementLife() {
+    var heartToAdd = $('.broken').first();
+    heartToAdd.removeClass('broken');
+    heartToAdd.addClass('active');
   }
 
   function isVictory() {
@@ -76,7 +93,8 @@ game.logic = function() {
   function showTopTimeModal(newTime) {
     $('.victory-greyout').html($('#top-time-modal').html());
     $('.victory-greyout').toggleClass('modal-visible');
-    $('.initials-submit').click(function() {
+    $('.modal-actual').submit(function(e) {
+      e.preventDefault();
       newTime.name = $('.initials').val().toUpperCase();
       while (newTime.name.length < 3) {
         newTime.name = '-' + newTime.name;
@@ -116,7 +134,7 @@ game.logic = function() {
     clearTimeout(to);
     $('.ungot').off('click', flip);
     timer.stop();
-    $('.ungot').toggleClass('ungot');
+    // $('.ungot').toggleClass('ungot'); // TODO: if you notice no performance issues, delete this shit
     showFailureModal();
   }
 
@@ -124,14 +142,18 @@ game.logic = function() {
     $('.failure-greyout').html($('#failure-modal').html());
     $('.failure-greyout').toggleClass('modal-visible');
     $('.again').click(function() {
-      setTimeout(restart, 2000);
       $('.failure-greyout').toggleClass('modal-visible');
+      setTimeout(restart, 2000);
     })
   }
 
   function right(pair) {
+    incrementLife();
     pair.forEach(function(item) {
       $(item).toggleClass('ungot');
+      // $('.game-card__decoration', $(item)).toggleClass('correct-animation');
+      setTimeout(function() { $('.game-card__decoration', $(item)).addClass('correct-animation');
+                              $('.game-card__decoration', $(item)).toggleClass('deco-flip');}, 300);
     })
     isVictory();
   }

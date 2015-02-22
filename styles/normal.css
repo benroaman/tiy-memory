@@ -129,10 +129,14 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: -25px;
-  margin-top: -25px;
+  -webkit-transform: translate(-50%, -50%);
   font-size: 50px;
   opacity: 0;
+}
+
+.correct-animation {
+  -webkit-animation: correct ease-in-out .65s;
+  opacity: 1;
 }
 
 /*makes icons appear when cards are clicked/flipped*/
@@ -198,6 +202,23 @@ so I just copied it and called it flip2*/
   100% {
     transform:  translate3d(0, 0, 150px) rotate3d(0, 1, 0, -180deg);
     animation-timing-function: ease-in;
+  }
+}
+
+@-webkit-keyframes correct {
+  0% {
+    /*animation-timing-function: ease-out;*/
+  }
+
+  50% {
+    color: #447f78;
+    font-size: 75px;
+    /*animation-timing-function: ease-in;*/
+  }
+
+  100% {
+    color: #455882;
+    font-size: 50px;
   }
 }
 
