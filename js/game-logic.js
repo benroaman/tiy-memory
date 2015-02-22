@@ -1,4 +1,8 @@
-game.logic = function() {
+game.logic = function(difficulty) {
+  if (difficulty === 'hard') {
+    getHard();
+  }
+
   var flips = 0;
 
   $('.game-card').on('click', flip);
@@ -32,6 +36,14 @@ game.logic = function() {
       $(item).toggleClass('guess');
     })
     return pair;
+  }
+
+  function getHard() {
+    $('.main-content').addClass('hard-board');
+    $('.game-card__shape').addClass('hard-card');
+    $('.game-card__decoration').addClass('hard-dec');
+    $('.title-o').addClass('hard-o');
+    $('.heart').addClass('hard-heart');
   }
 
   function animateFlip(card) {
@@ -75,7 +87,7 @@ game.logic = function() {
   function victory() {
     timer.stop();
     var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });
-    if ($('.game-card').length === 18) {
+    if (difficulty === 'normal') {
       if (game.timeStore.isTopTimeNormal(newTime)) {
         showTopTimeModal(newTime);
       } else {
@@ -99,7 +111,7 @@ game.logic = function() {
       while (newTime.name.length < 3) {
         newTime.name = '-' + newTime.name;
       }
-      if ($('.game-card').length === 18) {
+      if (difficulty === 'normal') {
         game.timeStore.addNormal(newTime);
       } else {
         game.timeStore.addHard(newTime);
@@ -115,7 +127,7 @@ game.logic = function() {
       $('.victory-greyout').toggleClass('modal-visible');
     }
     var topTimes = _.template($('#top-times').html(), { variable: 'm' });
-    if ($('.game-card').length === 18) {
+    if (difficulty === 'normal') {
       $('.best-times').html(topTimes({ times: game.timeStore.queryNormal() }));
     } else {
       $('.best-times').html(topTimes({ times: game.timeStore.queryHard() }));
@@ -148,10 +160,11 @@ game.logic = function() {
   }
 
   function right(pair) {
-    incrementLife();
+    if (difficulty === 'normal') {
+      incrementLife();
+    }
     pair.forEach(function(item) {
       $(item).toggleClass('ungot');
-      // $('.game-card__decoration', $(item)).toggleClass('correct-animation');
       setTimeout(function() { $('.game-card__decoration', $(item)).addClass('correct-animation');
                               $('.game-card__decoration', $(item)).toggleClass('deco-flip');}, 300);
     })

@@ -20,6 +20,15 @@ body {
   src: url(../fonts/memoryicons.ttf);
 }
 
+@font-face {
+  font-family: "hardicons";
+  src: url(../fonts/hard-font.ttf);
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+}
 
 .game-info {
   position: relative;
@@ -44,7 +53,7 @@ body {
   color: #edd097;
   font-family: memoryicons;
   font-size: .6em;
-  }
+}
 
 .life {
   position: relative;
@@ -102,14 +111,6 @@ body {
   cursor: default;
 }
 
-.hard-card {
-  position: relative;
-  display: inline-block;
-  float: left;
-  width: 12.5%;
-  padding-top: 12.5%;
-}
-
 .game-card__shape {
   -webkit-backface-visibility: visible;
   -webkit-animation: flip .5s;
@@ -149,6 +150,23 @@ body {
 .card-flip {
   -webkit-backface-visibility: visible;
   -webkit-animation: flip2 .5s;
+}
+
+.hard-board {
+  background: black;
+}
+
+.hard-card {
+  background: white;
+}
+
+.hard-dec {
+  color: black;
+}
+
+.hard-o {
+  color: red;
+  font-family: hardicons
 }
 
 /*-----------------------------*/
@@ -233,9 +251,4 @@ definitions, none of them worked. go figure*/
   .game-card {
   width: 33.3%;
   padding-top: 33.3%;
-  }
-
-  .hard-card {
-  width: 24.9%;
-  padding-top: 24.9%;
   }
