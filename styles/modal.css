@@ -33,16 +33,17 @@
   border-radius: .5em;
   width: 100px;
   margin: auto;
-  -webkit-transition: .2s;
+  -webkit-transition: .15s;
   cursor: pointer;
 }
 
 .close-records-modal:hover {
   background: black;
+  font-weight: bold;
 }
 
 .list-container {
-  display: inline-block
+  display: inline-block;
 }
 
 .list-container + .list-container {
@@ -211,7 +212,6 @@
 
 .initials-submit:hover {
   background: white;
-  font-weight: bold;
 }
 
 .modal-visible {
