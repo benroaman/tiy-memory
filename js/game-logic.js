@@ -20,6 +20,11 @@ game.logic = function(difficulty) {
     matchLogic();
   }
 
+  function animateFlip(card) {
+    $('.game-card__shape', card).toggleClass('card-flip');
+    $('.game-card__decoration', card).toggleClass('deco-flip');
+  }
+
   function matchLogic() {
     if (isSecondCard()) {
       var pair = getPair();
@@ -31,6 +36,10 @@ game.logic = function(difficulty) {
     }
   }
 
+  function isSecondCard() {
+    return !(flips % 2);
+  }
+
   function getPair() {
     var pair = $('.guess').toArray();
     pair.forEach(function(item) {
@@ -39,32 +48,26 @@ game.logic = function(difficulty) {
     return pair;
   }
 
-  function getHard() {  //applies classes with hard aesthetic css rules
-    $('.main-content').addClass('hard-board');
-    $('.game-card__shape').addClass('hard-card');
-    $('.game-card__decoration').addClass('hard-dec');
-    $('.title-o').addClass('hard-o');
-    $('.heart').addClass('hard-heart');
-    $('.game-card').addClass('hard-shape');
-  }
-
-  function animateFlip(card) {
-    $('.game-card__shape', card).toggleClass('card-flip');
-    $('.game-card__decoration', card).toggleClass('deco-flip');
-  }
-
-  function isSecondCard() {
-    return !(flips % 2);
-  }
-
   function isMatch(pair) {
     return pair[0].textContent === pair[1].textContent;
   }
 
-  function decrementLife() {
-    var lastActive = $('.active').last();
-    lastActive.addClass('broken'); //triggers animation
-    lastActive.removeClass('active'); //'active' is used in isLoss() logic
+  function right(pair) {
+    if (difficulty === 'normal') {
+      incrementLife();
+    }
+    pair.forEach(function(item) {
+      $(item).toggleClass('ungot');
+      setTimeout(function() { $('.game-card__decoration', $(item)).addClass('correct-animation'); // the delay is so the animation triggers after the flip
+                              $('.game-card__decoration', $(item)).toggleClass('deco-flip');}, 300); // for some reason the animation wouldn't run without toggling this extra class off
+    })
+    isVictory();
+  }
+
+  function wrong(pair) {
+    decrementLife();
+    var wrongTimeOut = setTimeout(flipBack.bind(null, pair), 1250);
+    isLoss(wrongTimeOut);
   }
 
   function incrementLife() {
@@ -73,12 +76,18 @@ game.logic = function(difficulty) {
     heartToAdd.addClass('active');
   }
 
+  function decrementLife() {
+    var lastActive = $('.active').last();
+    lastActive.addClass('broken'); //triggers animation
+    lastActive.removeClass('active'); //'active' is used in isLoss() logic
+  }
+
+
   function isVictory() {
     if (!$('.ungot').length) {
       victory();
     }
   }
-
 
   function isLoss(to) {
     if (!$('.active').length) {
@@ -102,6 +111,34 @@ game.logic = function(difficulty) {
         showVictoryModal();
       }
     }
+  }
+
+  function loss(to) {
+    clearTimeout(to); //stop flip-back animation from ruining modal transition
+    $('.ungot').off('click', flip); //shutting off flip on all remaining cards
+    timer.stop();
+    showFailureModal();
+  }
+
+  function flipBack(pair) {
+    pair.forEach(function(item){
+      $('.game-card__shape', $(item)).toggleClass('card-flip');
+      $('.game-card__decoration', $(item)).toggleClass('deco-flip');
+      $(item).on('click', flip);
+    })
+  }
+
+  function restart() {
+    game.router.run(location.hash.slice(1)) //soft refresh of current page
+  }
+
+  function getHard() {  //applies classes with hard aesthetic css rules
+    $('.main-content').addClass('hard-board');
+    $('.game-card__shape').addClass('hard-card');
+    $('.game-card__decoration').addClass('hard-dec');
+    $('.title-o').addClass('hard-o');
+    $('.heart').addClass('hard-heart');
+    $('.game-card').addClass('hard-shape');
   }
 
   function showTopTimeModal(newTime) {
@@ -140,49 +177,12 @@ game.logic = function(difficulty) {
     })
   }
 
-  function restart() {
-    game.router.run(location.hash.slice(1))
-  }
-
-  function loss(to) {
-    clearTimeout(to);
-    $('.ungot').off('click', flip);
-    timer.stop();
-    showFailureModal();
-  }
-
   function showFailureModal() {
     $('.failure-greyout').html($('#failure-modal').html());
     $('.failure-greyout').toggleClass('modal-visible');
     $('.again').click(function() {
       $('.failure-greyout').toggleClass('modal-visible');
-      setTimeout(restart, 2000);
-    })
-  }
-
-  function right(pair) {
-    if (difficulty === 'normal') {
-      incrementLife();
-    }
-    pair.forEach(function(item) {
-      $(item).toggleClass('ungot');
-      setTimeout(function() { $('.game-card__decoration', $(item)).addClass('correct-animation');
-                              $('.game-card__decoration', $(item)).toggleClass('deco-flip');}, 300);
-    })
-    isVictory();
-  }
-
-  function wrong(pair) {
-    decrementLife();
-    var wrongTimeOut = setTimeout(flipBack.bind(null, pair), 1250);
-    isLoss(wrongTimeOut);
-  }
-
-  function flipBack(pair) {
-    pair.forEach(function(item){
-      $('.game-card__shape', $(item)).toggleClass('card-flip');
-      $('.game-card__decoration', $(item)).toggleClass('deco-flip');
-      $(item).on('click', flip);
+      setTimeout(restart, 2000); // makes it so page reloads AFTER modal fades away
     })
   }
 }
