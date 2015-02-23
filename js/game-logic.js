@@ -45,6 +45,7 @@ game.logic = function(difficulty) {
     $('.game-card__decoration').addClass('hard-dec');
     $('.title-o').addClass('hard-o');
     $('.heart').addClass('hard-heart');
+    $('.game-card').addClass('hard-shape');
   }
 
   function animateFlip(card) {
