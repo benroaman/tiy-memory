@@ -63,7 +63,7 @@ body {
   padding: .5em;
   margin-top: 4px;
   padding-top: 45px;
-  -webkit-transition: all .15s;
+  -webkit-transition: all .2s;
   color: #455882;
   cursor: pointer;
 }
@@ -76,11 +76,12 @@ body {
 
 .link:hover {
   background: #ffdfa5;
-  color: #455882;
+  font-weight: bold;
 }
 
 .icon:hover {
   opacity: 0;
+  -webkit-transform: scale(1.05, 1.05);
 }
 
 @-webkit-keyframes pulse  {
@@ -88,10 +89,3 @@ body {
   50%   { -webkit-transform:  scale(1.1, 1.1);}
   100%  { -webkit-transform:  scale(1, 1);}
 }
-
-/*@-webkit-keyframes wobble  {
-  0%    { -webkit-transform:  rotate(0deg);}
-  33%   { -webkit-transform:  rotate(5deg);}
-  66%   { -webkit-transform:  rotate(-5deg);}
-  100%  { -webkit-transform:  rotate(0deg);}
-}*/

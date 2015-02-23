@@ -1,20 +1,21 @@
 game.logic = function(difficulty) {
-  if (difficulty === 'hard') {
+
+  if (difficulty === 'hard') {  //shall we paint it black?
     getHard();
   }
 
-  var flips = 0;
+  var flips = 0;  //tracks number of flips to identify pair events
 
   $('.game-card').on('click', flip);
 
-  var timer = game.Timer();
+  var timer = game.Timer();  //instancing and starting timer
   timer.start();
 
   function flip(e) {
     ++flips;
     var card = $(this);
-    card.off('click', flip);
-    card.toggleClass('guess');
+    card.off('click', flip); //turn off flip while card is exposed
+    card.toggleClass('guess');  //class identifies card as current selection
     animateFlip(card);
     matchLogic();
   }
@@ -33,12 +34,12 @@ game.logic = function(difficulty) {
   function getPair() {
     var pair = $('.guess').toArray();
     pair.forEach(function(item) {
-      $(item).toggleClass('guess');
+      $(item).toggleClass('guess'); //cards in pairs are no longer current selections
     })
     return pair;
   }
 
-  function getHard() {
+  function getHard() {  //applies classes with hard aesthetic css rules
     $('.main-content').addClass('hard-board');
     $('.game-card__shape').addClass('hard-card');
     $('.game-card__decoration').addClass('hard-dec');
@@ -61,8 +62,8 @@ game.logic = function(difficulty) {
 
   function decrementLife() {
     var lastActive = $('.active').last();
-    lastActive.addClass('broken');
-    lastActive.removeClass('active');
+    lastActive.addClass('broken'); //triggers animation
+    lastActive.removeClass('active'); //'active' is used in isLoss() logic
   }
 
   function incrementLife() {
@@ -86,8 +87,8 @@ game.logic = function(difficulty) {
 
   function victory() {
     timer.stop();
-    var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });
-    if (difficulty === 'normal') {
+    var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });  //creates time to test against top times
+    if (difficulty === 'normal') {  //TimeStore has a hard and a normal collection
       if (game.timeStore.isTopTimeNormal(newTime)) {
         showTopTimeModal(newTime);
       } else {
@@ -103,12 +104,12 @@ game.logic = function(difficulty) {
   }
 
   function showTopTimeModal(newTime) {
-    $('.victory-greyout').html($('#top-time-modal').html());
-    $('.victory-greyout').toggleClass('modal-visible');
-    $('.modal-actual').submit(function(e) {
+    $('.victory-greyout').html($('#top-time-modal').html());  //loads modal into display
+    $('.victory-greyout').toggleClass('modal-visible'); //makes modal visible
+    $('.modal-actual').submit(function(e) { //'modal-actual' is the form that submits player's initials
       e.preventDefault();
-      newTime.name = $('.initials').val().toUpperCase();
-      while (newTime.name.length < 3) {
+      newTime.name = $('.initials').val().toUpperCase();  //saves inputted initials into their time
+      while (newTime.name.length < 3) { //makes sure there are three characters to display
         newTime.name = '-' + newTime.name;
       }
       if (difficulty === 'normal') {
@@ -122,18 +123,18 @@ game.logic = function(difficulty) {
   }
 
   function showVictoryModal() {
-    $('.victory-greyout').html($('#victory-modal').html());
-    if (!$('.victory-greyout').hasClass('modal-visible')) {
+    $('.victory-greyout').html($('#victory-modal').html()); //loads victory modal into display
+    if (!$('.victory-greyout').hasClass('modal-visible')) { //modal may already be visible
       $('.victory-greyout').toggleClass('modal-visible');
     }
-    var topTimes = _.template($('#top-times').html(), { variable: 'm' });
+    var topTimes = _.template($('#top-times').html(), { variable: 'm' }); //loads top times
     if (difficulty === 'normal') {
       $('.best-times').html(topTimes({ times: game.timeStore.queryNormal() }));
     } else {
       $('.best-times').html(topTimes({ times: game.timeStore.queryHard() }));
     }
     $('.again').click(function() {
-      setTimeout(restart, 2000);
+      setTimeout(restart, 2750); //needs timeout to allow modal to fade out before refresh
       $('.victory-greyout').toggleClass('modal-visible');
     })
   }
@@ -146,7 +147,6 @@ game.logic = function(difficulty) {
     clearTimeout(to);
     $('.ungot').off('click', flip);
     timer.stop();
-    // $('.ungot').toggleClass('ungot'); // TODO: if you notice no performance issues, delete this shit
     showFailureModal();
   }
 
@@ -185,4 +185,3 @@ game.logic = function(difficulty) {
     })
   }
 }
-// TODO: style this shit

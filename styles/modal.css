@@ -1,3 +1,58 @@
+.records-modal-greyout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 1;
+  transition: all 1s;
+}
+
+.records-modal {
+  box-sizing: border-box;
+  padding: 25px;
+  position: absolute;
+  width: 710px;
+  left: 50%;
+  top: 40%;
+  -webkit-transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, .8);
+  text-align: center;
+  border-radius: 1em;
+}
+
+.close-records-modal {
+  background: none;
+  color: #455882;
+  padding: .25em;
+  font-size: 2em;
+  border: 2px solid #455882;
+  border-radius: .5em;
+  width: 100px;
+  margin: auto;
+  -webkit-transition: .2s;
+  cursor: pointer;
+}
+
+.close-records-modal:hover {
+  background: black;
+}
+
+.list-container {
+  display: inline-block
+}
+
+.list-container + .list-container {
+  margin-left: 150px;
+}
+
+.hall-times {
+  color: white;
+}
+
 .modal-greyout {
   position: absolute;
   top: 0;
@@ -9,10 +64,12 @@
   visibility: hidden;
   opacity: 0;
   transition: all 2s;
+  transition-delay: .8s;
 }
 
 .failure-greyout {
   background: rgba(178, 34, 34, .75);
+  transition-delay: 0;
 }
 
 .modal-actual {
@@ -41,6 +98,11 @@
   color: seagreen;
 }
 
+.times-modal-title {
+  text-align: center;
+  color: #455882;
+}
+
 .failure {
   color: firebrick;
   margin-top: 1em;
@@ -48,12 +110,17 @@
 }
 
 .best-times {
+  color: slategrey;
   text-align: center;
   margin: auto;
   margin-top: .5em;
   width: 100%;
   margin-bottom: 1.75em;
   list-style-type: none;
+}
+
+.hall-times {
+  color: white;
 }
 
 .bt-label {
@@ -64,12 +131,12 @@
 .best-time {
   font-family: monospace;
   font-size: 1.5em;
-  color: slategrey;
+  color: inherit;
 }
 
 .time-elem {
   font-size: 1.5em;
-  color: slategrey;
+  color: inherit;
 }
 
 .modal-button {
@@ -144,6 +211,7 @@
 
 .initials-submit:hover {
   background: white;
+  font-weight: bold;
 }
 
 .modal-visible {

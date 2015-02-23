@@ -12,6 +12,23 @@
 
     <script type="text/html" id="main-page">
 
+      <div class="records-modal-greyout">
+
+        <div class="records-modal">
+          <h1 class="victory times-modal-title">hall of recollection</h1>
+          <div class="list-container">
+            <h2 class="list-title">normal mode</h2>
+            <ol class="best-times hall-times normal-times"></ol>
+          </div>
+          <div class="list-container">
+            <h2 class="list-title">hard mode</h2>
+            <ol class="best-times hall-times hard-times"></ol>
+          </div>
+          <div class="close-records-modal">back</div>
+        </div>
+
+      </div>
+
       <div class="title-box">
 
         <h1 class="title-text">mem<span class="icon">o</span>ry</h1>
@@ -20,8 +37,8 @@
         <div class="link-wrapper">
           <a class="link easy" href="#normalmode">normal</a>
           <a class="link hard" href="#hardmode">hard</a>
-          <span class="link">records</span>
-          <span class="link">info</span>
+          <span class="link records-link">records</span>
+          <span class="link info-link">info</span>
         </div>
 
       </div>
@@ -91,7 +108,7 @@
         <h1 class="got-top-time">...and in record time!</h1>
         <h2 class="got-top-time-sub">enter your initials:</h2>
         <input type="text" class="initials" maxlength="3" placeholder="---" required />
-        <button class="initials-submit">become immortal</button>
+        <button class="initials-submit" title="...in localStorage">become immortal</button>
 
       </form>
 
@@ -124,6 +141,7 @@
     <script src="js/time-store.js"></script>
     <script src="js/time.js"></script>
     <script src="js/game-logic.js"></script>
+    <script src="js/main-page-modals.js"></script>
     <script src="js/pages/main-page.js"></script>
     <script src="js/pages/normal-page.js"></script>
     <script src="js/pages/hard-page.js"></script>
