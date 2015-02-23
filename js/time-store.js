@@ -22,6 +22,14 @@ game.TimeStore = function() {
           tmp = collectionNormal[i];
           collectionNormal[i] = cmp;
           cmp = tmp;
+          // I hope this works, it's meant to make it so that when a score ties, the oldest gets priority
+          var x = i;
+          while (collectionNormal[x + 1] && cmp.total === collectionNormal[x + 1].total) {
+            tmp = collectionNormal[x + 1];
+            collectionNormal[x + 1] = cmp;
+            cmp = tmp;
+            ++x;
+          }
         }
       }
     },
@@ -37,6 +45,14 @@ game.TimeStore = function() {
           tmp = collectionHard[i];
           collectionHard[i] = cmp;
           cmp = tmp;
+          // I hope this works, it's meant to make it so that when a score ties, the oldest gets priority
+          var x = i;
+          while (collectionHard[x + 1] && cmp.total === collectionHard[x + 1].total) {
+            tmp = collectionHard[x + 1];
+            collectionHard[x + 1] = cmp;
+            cmp = tmp;
+            ++x;
+          }
         }
       }
     },
