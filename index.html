@@ -58,7 +58,7 @@
         <div class="life">
           <span class="heart active">a<span class="heart active">a<span class="heart active">a<span class="heart active">a<span class="heart active">a<span class="heart active">a</span></span></span></span></span></span>
         </div>
-        <div class="game-timer"><span class="min">00</span>:<span class="sec">00</span></div>
+        <div class="game-timer"><span class="min">00</span>:<span class="sec">00</span>:<span class="mil">00</span></div>
       </div>
 
       <div class="game-board">
@@ -120,12 +120,12 @@
         <% if (m.times[i]) { %>
           <li class="best-time">
             <span class="time-elem time-name"><%- m.times[i].name %></span>
-            <span class="time-elem time-min"><%- m.times[i].min %></span>:<span class="time-elem time-sec"><%- m.times[i].sec %></span>
+            <span class="time-elem time-min"><%- m.times[i].min %></span>:<span class="time-elem time-sec"><%- m.times[i].sec %></span>:<span class="time-elem time-mil"><%- m.times[i].mil %></span>
           </li>
         <% } else { %>
           <li class="best-time">
             <span class="time-elem time-name"><%- '---' %></span>
-            <span class="time-elem time-min"><%- '--' %></span>:<span class="time-elem time-sec"><%- '--' %></span>
+            <span class="time-elem time-min"><%- '--' %></span>:<span class="time-elem time-sec"><%- '--' %></span>:<span class="time-elem time-mil"><%- '--' %></span>
           </li>
         <% } %>
       <% } %>

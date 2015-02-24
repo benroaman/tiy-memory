@@ -97,7 +97,7 @@ game.logic = function(difficulty) {
 
   function victory() {
     timer.stop();
-    var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text() });  //creates time to test against top times
+    var newTime = game.Time({ min: $('.min').text(), sec: $('.sec').text(), mil: $('.mil').text() });  //creates time to test against top times
     if (difficulty === 'normal') {  //TimeStore has a hard and a normal collection
       if (game.timeStore.isTopTimeNormal(newTime)) {
         showTopTimeModal(newTime);

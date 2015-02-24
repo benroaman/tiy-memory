@@ -78,13 +78,13 @@ game.TimeStore = function() {
     },
 
     save: function() {
-      localStorage.setItem('memoryTimesNormal', JSON.stringify(collectionNormal));
-      localStorage.setItem('memoryTimesHard', JSON.stringify(collectionHard));
+      localStorage.setItem('memoryTimesNormalMil', JSON.stringify(collectionNormal));
+      localStorage.setItem('memoryTimesHardMil', JSON.stringify(collectionHard));
     },
 
     load: function() {
-      collectionNormal = JSON.parse(localStorage.getItem('memoryTimesNormal') || '[]');
-      collectionHard = JSON.parse(localStorage.getItem('memoryTimesHard') || '[]');
+      collectionNormal = JSON.parse(localStorage.getItem('memoryTimesNormalMil') || '[]');
+      collectionHard = JSON.parse(localStorage.getItem('memoryTimesHardMil') || '[]');
     }
   };
 }

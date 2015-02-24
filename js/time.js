@@ -4,6 +4,7 @@ game.Time = function(spec) {
     name: spec.name,
     min: spec.min,
     sec: spec.sec,
-    total: Number(spec.min) * 60 + Number(spec.sec)
+    mil: spec.mil,
+    total: (Number(spec.min) * 60 + Number(spec.sec))*100 + Number(spec.mil)
   };
 }
